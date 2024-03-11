@@ -3,14 +3,11 @@ document.addEventListener("click", function (event) {
   if (clickedElement.tagName === "TD") {
     const columnIndex = clickedElement.id.split(".")[0];
     const color = currentPlayer === 1 ? "red" : "yellow";
-    colorColumnOnClic(columnIndex, color);
-    changePlayer();
+    const emptyCell = findFirstEmptyCellInColumn(columnIndex);
+    if (emptyCell !== null) {
+      emptyCell.style.backgroundColor = color;
+      changePlayer(); 
+      alert("La colonne est pleine !");
+    }
   }
 });
-
-function colorColumnOnClic(columnIndex, color) {
-  const cells = document.querySelectorAll(`td[id^="${columnIndex}."]`);
-  cells.forEach((cell) => {
-    cell.style.backgroundColor = color;
-  });
-}
